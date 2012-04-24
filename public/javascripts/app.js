@@ -282,16 +282,6 @@
   }
 }));
 (this.require.define({
-  "views/templates/home": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "  <h1>brunch</h1>\n  <h2>Welcome to this it yes!</h2>\n  <ul>\n    <li><a href=\"http://brunch.readthedocs.org/\">Documentation</a></li>\n  </ul>\n";});
-  }
-}));
-(this.require.define({
   "views/view": function(exports, require, module) {
     (function() {
   var View,
@@ -310,12 +300,13 @@
       View.__super__.constructor.apply(this, arguments);
     }
 
-    View.prototype.template = function() {};
+    View.prototype.itemTemplate = "<div id='onetwo'>one two</div>";
 
     View.prototype.getRenderData = function() {};
 
     View.prototype.render = function() {
-      this.$el.append(this.template(this.getRenderData()));
+      this.html = this.itemTemplate;
+      this.$el.append(this.html);
       this.afterRender();
       return this;
     };
