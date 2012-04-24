@@ -3,7 +3,6 @@ Application =
   initialize: ->
     HomeView = require 'views/home_view'
     AboutView = require 'views/about_view'
-    HeaderView = require 'views/header_view'
     Router = require 'lib/router'
 
     # Ideally, initialized classes should be kept in controllers & mediator.
@@ -11,7 +10,6 @@ Application =
     # https://github.com/paulmillr/brunch-with-chaplin
     @homeView = new HomeView()
     @aboutView = new AboutView()
-    @headerView = new AboutView()
 
     # Instantiate the router
     @router = new Router()

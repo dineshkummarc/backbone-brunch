@@ -84,14 +84,12 @@
 
   Application = {
     initialize: function() {
-      var AboutView, HeaderView, HomeView, Router;
+      var AboutView, HomeView, Router;
       HomeView = require('views/home_view');
       AboutView = require('views/about_view');
-      HeaderView = require('views/header_view');
       Router = require('lib/router');
       this.homeView = new HomeView();
       this.aboutView = new AboutView();
-      this.headerView = new AboutView();
       this.router = new Router();
       return typeof Object.freeze === "function" ? Object.freeze(this) : void 0;
     }
@@ -142,11 +140,11 @@
     };
 
     Router.prototype.home = function() {
-      return $('body').html(application.homeView.render().el);
+      return $('#main').html(application.homeView.render().el);
     };
 
     Router.prototype.about = function() {
-      return $('body').html(application.aboutView.render().el);
+      return $('#main').html(application.aboutView.render().el);
     };
 
     return Router;
@@ -232,42 +230,9 @@
       AboutView.__super__.constructor.apply(this, arguments);
     }
 
-    AboutView.prototype.id = 'about-view';
-
     AboutView.prototype.template = template;
 
     return AboutView;
-
-  })(View);
-
-}).call(this);
-
-  }
-}));
-(this.require.define({
-  "views/header_view": function(exports, require, module) {
-    (function() {
-  var HeaderView, View, template,
-    __hasProp = Object.prototype.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
-
-  View = require('./view');
-
-  template = require('./templates/header');
-
-  module.exports = HeaderView = (function(_super) {
-
-    __extends(HeaderView, _super);
-
-    function HeaderView() {
-      HeaderView.__super__.constructor.apply(this, arguments);
-    }
-
-    HeaderView.prototype.id = 'header-view';
-
-    HeaderView.prototype.template = template;
-
-    return HeaderView;
 
   })(View);
 
@@ -294,6 +259,8 @@
       HomeView.__super__.constructor.apply(this, arguments);
     }
 
+    HomeView.prototype.id = 'home-view';
+
     HomeView.prototype.template = template;
 
     return HomeView;
@@ -311,17 +278,7 @@
   var foundHelper, self=this;
 
 
-  return "<div id=\"content\">\n  <h1>About</h1>\n  <p>This is the about page</p>\n</div>\n";});
-  }
-}));
-(this.require.define({
-  "views/templates/header": function(exports, require, module) {
-    module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  helpers = helpers || Handlebars.helpers;
-  var foundHelper, self=this;
-
-
-  return "	This is the header\n";});
+  return "  <h1>About</h1>\n  <p>This is the about page</p>\n";});
   }
 }));
 (this.require.define({
@@ -331,7 +288,7 @@
   var foundHelper, self=this;
 
 
-  return "<div id=\"content\">\n  <h1>brunch</h1>\n  <h2>Welcome to this it yes!</h2>\n  <ul>\n    <li><a href=\"http://brunch.readthedocs.org/\">Documentation</a></li>\n  </ul>\n</div>\n";});
+  return "  <h1>brunch</h1>\n  <h2>Welcome to this it yes!</h2>\n  <ul>\n    <li><a href=\"http://brunch.readthedocs.org/\">Documentation</a></li>\n  </ul>\n";});
   }
 }));
 (this.require.define({
@@ -358,9 +315,7 @@
     View.prototype.getRenderData = function() {};
 
     View.prototype.render = function() {
-      this.$el.append('<div id="header">This is the header</div>');
       this.$el.append(this.template(this.getRenderData()));
-      this.$el.append('<div id="footer">This is the footer</div>');
       this.afterRender();
       return this;
     };
